@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Template Generator</title>
+</head>
+<body>
+    <h1>Form Template Generator</h1>
+    <form id="formNameForm">
+        <label for="form_name">Form Name:</label>
+        <input type="text" id="form_name" name="form_name">
+        <button type="submit">Generate Template</button>
+    </form>
+
+    <h2>Generated Template</h2>
+    <div id="template"></div>
+
+    <script>
+        document.getElementById("formNameForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const formName = document.getElementById("form_name").value;
+
+            const response = await fetch("/generate_template", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ form_name: formName })
+            });
+
+            const data = await response.json();
+            const templateDiv = document.getElementById("template");
+            if (data.template) {
+                templateDiv.innerHTML = JSON.stringify(data.template, null, 2);
+            } else {
+                templateDiv.innerHTML = "Error generating template.";
+            }
+        });
+    </script>
+</body>
+</html>

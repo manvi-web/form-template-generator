@@ -1,0 +1,7 @@
+flask
+pickle
+sqlite3
+scikit-learn
+pandas
+json
+gunicorn
