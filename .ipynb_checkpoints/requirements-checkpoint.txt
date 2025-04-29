@@ -1,6 +1,4 @@
 flask
-sqlite3
 scikit-learn
 pandas
-json
 gunicorn
